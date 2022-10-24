@@ -1,0 +1,53 @@
+<div class="submissions-filter-wrapper">
+	<form [formGroup]="filterForm">
+		<!--    Search field, Select form, Select status, Calendar, Map/list switch route, export-->
+		<mat-form-field class="filter-field search-field" appearance="fill">
+			<mat-label>Search</mat-label>
+			<mat-icon matPrefix>search</mat-icon>
+			<input type="text" matInput formControlName="formSearch" />
+		</mat-form-field>
+		<mat-form-field class="filter-field select-field" appearance="fill">
+			<mat-label>Select form</mat-label>
+			<mat-select formControlName="formType">
+				<mat-option>All</mat-option>
+				<mat-option>My submissions</mat-option>
+				<mat-option>My team's submissions</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field class="filter-field select-field" appearance="fill">
+			<mat-label>Select status</mat-label>
+			<mat-select formControlName="formStatus">
+				<mat-option>All</mat-option>
+				<mat-option>Open</mat-option>
+				<mat-option>Closed</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<mat-form-field class="filter-field calendar-field" appearance="fill">
+			<mat-label>Choose a date</mat-label>
+			<input matInput [matDatepicker]="picker" formControlName="formDate" />
+			<mat-hint>MM/DD/YYYY</mat-hint>
+			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
+		</mat-form-field>
+		<mat-button-toggle-group
+			aria-label="Font Style"
+			formControlName="formMapOrList"
+			(change)="onChangeSubmissionView($event)"
+		>
+			<mat-button-toggle value="map">
+				<a routerLink="/submissions/map" routerLinkActive="active" (click)="stop($event)"
+					>Map</a
+				>
+			</mat-button-toggle>
+			<mat-button-toggle value="list">
+				<a routerLink="/submissions/list" routerLinkActive="active" (click)="stop($event)"
+					>List</a
+				>
+			</mat-button-toggle>
+		</mat-button-toggle-group>
+		<button mat-button color="primary" class="export-button" (click)="exportSubmissions()">
+			<img src="assets/icons/paper_download.svg" alt="export icon" />
+			<span>Export</span>
+		</button>
+	</form>
+</div>

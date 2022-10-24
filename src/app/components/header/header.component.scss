@@ -1,0 +1,31 @@
+mat-toolbar {
+	height: 72px;
+	.header-name {
+		font-size: 32px;
+		font-weight: 700;
+		letter-spacing: 0.02em;
+	}
+	.header-links {
+		height: 100%;
+		display: flex;
+		a {
+			height: 100%;
+			display: flex;
+			align-items: center;
+			font-size: 18px;
+			font-weight: 500;
+			.mat-icon {
+				font-size: 22px;
+				margin-right: 10px;
+			}
+		}
+	}
+	.active-link {
+		background: var(--primary-hover);
+	}
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+	padding: 0 32px;
+}
