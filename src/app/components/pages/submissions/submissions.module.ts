@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SubmissionItemComponent } from './pages/submissions-map/submission-item/submission-item.component';
 import { SubmissionsComponent } from './submissions.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SubmissionsFilterModule } from './submissions-filter/submissions-filter.module';

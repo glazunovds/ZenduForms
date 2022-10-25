@@ -59,6 +59,7 @@ html,
 body {
 	height: 100%;
 }
+
 body {
 	margin: 0;
 	font-family: Roboto, 'Helvetica Neue', sans-serif;
@@ -68,7 +69,13 @@ body {
 	flex: 1 1 auto;
 }
 
-// css variables
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: none;
+}
 
 :root {
 	--primary: #2188d9;
@@ -78,4 +85,38 @@ body {
 	--success: #53d86a;
 	--border: #b8b9bc;
 	--black: #060c1b;
+}
+
+.search-field .mat-form-field-label {
+	color: var(--border);
+}
+
+body .mat-form-field-label {
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 130%;
+	color: var(--black);
+}
+
+body .mat-form-field-appearance-fill .mat-form-field-flex {
+	background: white;
+	padding: 0.25em 0.75em 0 0.75em;
+	display: flex;
+	align-items: center;
+}
+
+.mat-form-field-wrapper {
+	padding-bottom: 0;
+}
+
+.mat-form-field-subscript-wrapper {
+	display: none;
+}
+
+.mat-form-field-underline {
+	display: none;
+}
+
+.mat-select-arrow {
+	opacity: 0;
 }

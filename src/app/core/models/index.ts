@@ -1,10 +1,12 @@
 export interface ISubmission {
+	id: string;
 	taskName: string;
 	status: SubmissionStatus;
 	emailFrom: string;
 	emailTo: string;
 	customerAddress: string;
-	dueDate: number;
+	dueDateRaw: number;
+	dueDateShow: string;
 }
 
 export enum SubmissionStatus {

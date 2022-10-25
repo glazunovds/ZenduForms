@@ -1,16 +1,18 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { MockService } from '../../../../core/services/mock.service';
+import { saveAs } from 'file-saver';
 
 @Component({
 	selector: 'app-submissions-filter',
 	templateUrl: './submissions-filter.component.html',
 	styleUrls: ['./submissions-filter.component.scss'],
 })
-export class SubmissionsFilterComponent implements OnInit {
+export class SubmissionsFilterComponent {
 	filterForm: FormGroup;
 
-	constructor() {
+	constructor(private mockService: MockService) {
 		this.filterForm = new FormGroup({
 			formSearch: new FormControl(''),
 			formType: new FormControl(''),
@@ -19,8 +21,6 @@ export class SubmissionsFilterComponent implements OnInit {
 			formMapOrList: new FormControl('map'),
 		});
 	}
-
-	ngOnInit(): void {}
 
 	onChangeSubmissionView(event: MatButtonToggleChange): void {
 		console.log(event);
@@ -31,6 +31,11 @@ export class SubmissionsFilterComponent implements OnInit {
 	}
 
 	exportSubmissions() {
-		console.log('export submissions');
+		const result = this.mockService.getSavedMockData();
+		debugger;
+		const blob = new Blob([JSON.stringify(result) as unknown as BlobPart], {
+			type: 'text/plain;charset=utf-8',
+		});
+		saveAs(blob, 'submissions.json');
 	}
 }

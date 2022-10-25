@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-workflow',
-  templateUrl: './workflow.component.html',
-  styleUrls: ['./workflow.component.scss']
+	selector: 'app-workflow',
+	templateUrl: './workflow.component.html',
+	styleUrls: ['./workflow.component.scss'],
 })
-export class WorkflowComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class WorkflowComponent {}

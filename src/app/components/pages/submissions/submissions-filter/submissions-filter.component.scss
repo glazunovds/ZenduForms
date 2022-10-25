@@ -2,5 +2,29 @@
 	form {
 		display: flex;
 		justify-content: space-between;
+
+		.search-field {
+			.search-icon {
+				padding-right: 10px;
+			}
+		}
+
+		.filter-field {
+			border: 1px solid var(--border);
+			border-radius: 4px;
+			height: 48px;
+		}
+	}
+}
+
+a:visited {
+	color: var(--black);
+}
+
+.mat-button-toggle-checked {
+	background-color: var(--primary);
+	color: white;
+	a {
+		color: white;
 	}
 }

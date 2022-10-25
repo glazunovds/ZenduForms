@@ -3,21 +3,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SubmissionsMapComponent } from './submissions-map.component';
 
 describe('SubmissionsMapComponent', () => {
-  let component: SubmissionsMapComponent;
-  let fixture: ComponentFixture<SubmissionsMapComponent>;
+	let component: SubmissionsMapComponent;
+	let fixture: ComponentFixture<SubmissionsMapComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ SubmissionsMapComponent ]
-    })
-    .compileComponents();
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [SubmissionsMapComponent],
+		}).compileComponents();
 
-    fixture = TestBed.createComponent(SubmissionsMapComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(SubmissionsMapComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

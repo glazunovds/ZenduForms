@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-submissions-map',
-  templateUrl: './submissions-map.component.html',
-  styleUrls: ['./submissions-map.component.scss']
+	selector: 'app-submissions-map',
+	templateUrl: './submissions-map.component.html',
+	styleUrls: ['./submissions-map.component.scss'],
 })
-export class SubmissionsMapComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class SubmissionsMapComponent {}

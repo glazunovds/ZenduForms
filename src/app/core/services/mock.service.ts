@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
 import { IAddress, ISubmission, SubmissionStatus } from '../models';
-import { first, map, Observable, of, timeout } from 'rxjs';
+import { first, map, Observable, timeout } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import * as uuid from 'uuid';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class MockService {
+	private mockData: ISubmission[] = [];
+
 	constructor(private http: HttpClient) {}
 
 	public getMockData(count: number): Observable<ISubmission[]> {
-		return of(this.generateMockData(count)).pipe(timeout(2000));
+		return this.generateMockData(count).pipe(timeout(2000));
+	}
+
+	public getSavedMockData(): ISubmission[] {
+		return this.mockData;
 	}
 
 	private getRandomDateTime(): number {
@@ -28,27 +35,31 @@ export class MockService {
 		);
 	}
 
-	private generateMockData(count: number): ISubmission[] {
-		const data: ISubmission[] = [];
-		this.getRandomAddress(count)
-			.pipe(first())
-			.subscribe((addresses) => {
+	private generateMockData(count: number): Observable<ISubmission[]> {
+		return this.getRandomAddress(count).pipe(
+			first(),
+			map((addresses) => {
 				const keys = Object.keys(SubmissionStatus);
-				const randomStatus = keys[
-					Math.floor(Math.random() * keys.length)
-				] as SubmissionStatus;
-				for (let i = 0; i < count; i++) {
-					data.push({
+				const result = addresses.map((address, index) => {
+					const randomStatus = keys[
+						Math.floor(Math.random() * keys.length)
+					] as SubmissionStatus;
+					const randomDate = this.getRandomDateTime();
+					return {
+						id: uuid.v4(),
 						taskName: 'Work Flow: Requires Location',
 						status: randomStatus,
 						emailFrom: 'zendu@zendu.com',
 						emailTo: 'tracy@zendu.com',
-						customerAddress: addresses[i],
-						dueDate: this.getRandomDateTime(),
-					});
-				}
-			});
-		return data;
+						customerAddress: address,
+						dueDateRaw: randomDate,
+						dueDateShow: new Date(randomDate).toLocaleString(),
+					};
+				});
+				this.mockData = result;
+				return result;
+			}),
+		);
 	}
 
 	private getRandomAddress(size: number): Observable<string[]> {

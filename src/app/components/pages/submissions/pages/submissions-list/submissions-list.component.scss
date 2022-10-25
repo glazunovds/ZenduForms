@@ -1,0 +1,82 @@
+.table-wrapper {
+	height: 100%;
+	position: relative;
+
+	.loading {
+		padding-top: 32px;
+		position: absolute;
+		display: flex;
+		width: 100%;
+		height: 100%;
+		justify-content: center;
+		align-items: center;
+		backdrop-filter: blur(6px);
+		z-index: 1;
+	}
+
+	table {
+		width: 100%;
+		margin-top: 32px;
+		min-height: 536px;
+		.overdue {
+			color: var(--warn);
+		}
+		tr:hover {
+			.mat-checkbox {
+				opacity: 1;
+			}
+		}
+		td {
+			font-size: 16px;
+			font-weight: 400;
+		}
+		th {
+			font-size: 16px;
+			font-weight: 700;
+			color: var(--black);
+		}
+		.table-status {
+			background: #d7e5da;
+			border: 1px solid var(--success);
+			border-radius: 4px;
+			display: inline-flex;
+			justify-content: center;
+			align-items: center;
+			padding: 4px 16px;
+			gap: 8px;
+			.status-circle {
+				width: 12px;
+				height: 12px;
+				border-radius: 50%;
+				background: var(--success);
+			}
+		}
+		.uncompleted {
+			background: rgba(255, 61, 0, 0.1);
+			border: 1px solid var(--warn);
+			.status-circle {
+				background: var(--warn);
+			}
+		}
+		.unassigned {
+			background: #ececed;
+			border: 1px solid #b8b9bc;
+			.status-circle {
+				background: #b8b9bc;
+			}
+		}
+	}
+}
+
+.mat-checkbox {
+	opacity: 0;
+}
+
+.mat-checkbox:hover {
+	opacity: 1;
+}
+
+.mat-checkbox-checked,
+.mat-checkbox-indeterminate {
+	opacity: 1;
+}
