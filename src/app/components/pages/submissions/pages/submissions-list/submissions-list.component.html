@@ -5,7 +5,11 @@
 		</div>
 	</ng-container>
 	<ng-container>
-		<table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
+		<table
+			[dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: page }"
+			class="mat-elevation-z8"
+			mat-table
+		>
 			<ng-container matColumnDef="select">
 				<th *matHeaderCellDef mat-header-cell>
 					<mat-checkbox
@@ -33,7 +37,7 @@
 			</ng-container>
 
 			<ng-container matColumnDef="status">
-				<th *matHeaderCellDef mat-header-cell mat-sort-header="status">Status</th>
+				<th *matHeaderCellDef mat-header-cell>Status</th>
 				<td *matCellDef="let element" mat-cell>
 					<div [ngClass]="element['status']" class="table-status">
 						<div class="status-circle"></div>
@@ -76,11 +80,48 @@
 			<tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
 			<tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
 		</table>
-		<mat-paginator
-			aria-label="Select page of periodic elements"
-			pageSize="10"
-			showFirstLastButtons
-		>
-		</mat-paginator>
 	</ng-container>
 </div>
+
+<pagination-template #p="paginationApi" (pageChange)="page = $event">
+	<div class="custom-pagination">
+		<div class="custom-info">
+			{{ (p.getCurrent() - 1) * PAGE_SIZE + 1 }}-{{
+				Math.min((p.getCurrent() - 1) * PAGE_SIZE + PAGE_SIZE, p.getTotalItems())
+			}}
+			of
+			{{ p.getTotalItems() }} submissions
+		</div>
+		<div class="custom-controls">
+			<div
+				class="pagination-previous custom-paginator-btn"
+				[class.disabled]="p.isFirstPage()"
+				(click)="p.getCurrent() > 1 && p.previous()"
+			>
+				<img src="assets/icons/pagination_arrow_left.svg" alt="pagination arrow left" />
+			</div>
+
+			<div
+				*ngFor="let page of p.pages"
+				[class.current]="p.getCurrent() === page.value"
+				(click)="p.setCurrent(page.value)"
+				class="custom-paginator-btn"
+			>
+				<a *ngIf="p.getCurrent() !== page.value">
+					<span>{{ page.label }}</span>
+				</a>
+				<div *ngIf="p.getCurrent() === page.value">
+					<span>{{ page.label }}</span>
+				</div>
+			</div>
+
+			<div
+				class="pagination-next custom-paginator-btn"
+				[class.disabled]="p.isLastPage()"
+				(click)="p.getCurrent() < p.pages.length && p.next()"
+			>
+				<img src="assets/icons/pagination_arrow_right.svg" alt="pagination arrow right" />
+			</div>
+		</div>
+	</div>
+</pagination-template>

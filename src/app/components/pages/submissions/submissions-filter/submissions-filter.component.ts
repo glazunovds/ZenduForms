@@ -32,7 +32,6 @@ export class SubmissionsFilterComponent {
 
 	exportSubmissions() {
 		const result = this.mockService.getSavedMockData();
-		debugger;
 		const blob = new Blob([JSON.stringify(result) as unknown as BlobPart], {
 			type: 'text/plain;charset=utf-8',
 		});

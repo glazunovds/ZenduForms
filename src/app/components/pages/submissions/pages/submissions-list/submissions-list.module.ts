@@ -7,6 +7,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
 	{
@@ -26,6 +27,7 @@ const routes: Routes = [
 		MatSortModule,
 		MatCheckboxModule,
 		MatProgressSpinnerModule,
+		NgxPaginationModule,
 	],
 })
 export class SubmissionsListModule {}

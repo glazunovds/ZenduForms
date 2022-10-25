@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MockService } from '../../../../../core/services/mock.service';
 import { ISubmission } from '../../../../../core/models';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 
@@ -12,9 +12,11 @@ import { SelectionModel } from '@angular/cdk/collections';
 	styleUrls: ['./submissions-list.component.scss'],
 })
 export class SubmissionsListComponent implements AfterViewInit {
-	public dataSource = new MatTableDataSource<ISubmission[]>([]);
+	public dataSource: ISubmission[] = [];
 	public isLoading = true;
-	public selection = new SelectionModel<ISubmission[]>(true, []);
+	public selection = new SelectionModel<ISubmission>(true, []);
+	public page = 1;
+	public Math = Math;
 	public displayedColumns: string[] = [
 		'select',
 		'taskName',
@@ -25,29 +27,29 @@ export class SubmissionsListComponent implements AfterViewInit {
 		'dueDate',
 	];
 	public today = new Date();
-	@ViewChild(MatPaginator) paginator!: MatPaginator;
+	public PAGE_SIZE = 10;
 	@ViewChild(MatSort) sort!: MatSort;
+	@ViewChild('p') p: unknown;
 
 	constructor(private mockService: MockService) {}
 
 	ngAfterViewInit() {
-		this.dataSource.paginator = this.paginator;
-		this.mockService.getMockData(100).subscribe((data) => {
-			this.dataSource.data = data as unknown as ISubmission[][];
-			this.dataSource.sort = this.sort;
+		// free api cant handle too many requests, sometimes it will fail
+		this.mockService.getMockData(77).subscribe((data) => {
+			this.dataSource = data;
 			this.isLoading = false;
 		});
 	}
 
 	isAllSelected() {
 		const numSelected = this.selection.selected.length;
-		const numRows = this.dataSource.data.length;
+		const numRows = this.dataSource.length;
 		return numSelected === numRows;
 	}
 
 	masterToggle() {
 		this.isAllSelected()
 			? this.selection.clear()
-			: this.dataSource.data.forEach((row) => this.selection.select(row));
+			: this.dataSource.forEach((row) => this.selection.select(row));
 	}
 }

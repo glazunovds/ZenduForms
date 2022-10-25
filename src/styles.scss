@@ -120,3 +120,23 @@ body .mat-form-field-appearance-fill .mat-form-field-flex {
 .mat-select-arrow {
 	opacity: 0;
 }
+
+.mat-checkbox-inner-container {
+	width: 24px !important;
+	height: 24px !important;
+}
+
+mat-paginator {
+	.mat-paginator-range-actions {
+		width: 100%;
+	}
+
+	.mat-paginator-range-label {
+		width: 100%;
+		margin: 0;
+	}
+
+	.mat-paginator-range-label:after {
+		content: ' submissions';
+	}
+}

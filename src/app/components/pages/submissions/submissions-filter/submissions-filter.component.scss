@@ -1,18 +1,26 @@
 .submissions-filter-wrapper {
+	padding-bottom: 32px;
 	form {
 		display: flex;
 		justify-content: space-between;
-
-		.search-field {
-			.search-icon {
-				padding-right: 10px;
-			}
+		.main-filters,
+		.right-buttons {
+			display: flex;
+			justify-content: space-between;
 		}
 
 		.filter-field {
+			width: 209px;
 			border: 1px solid var(--border);
 			border-radius: 4px;
 			height: 48px;
+			margin-right: 40px;
+		}
+		.search-field {
+			width: 334px;
+			.search-icon {
+				padding-right: 10px;
+			}
 		}
 	}
 }
@@ -20,7 +28,16 @@
 a:visited {
 	color: var(--black);
 }
-
+mat-button-toggle-group {
+	border: 2px solid #b8b9bc;
+	border-radius: 4px;
+	margin-right: 8px;
+}
+mat-button-toggle {
+	width: 80px;
+	height: 100%;
+	font-size: 16px;
+}
 .mat-button-toggle-checked {
 	background-color: var(--primary);
 	color: white;

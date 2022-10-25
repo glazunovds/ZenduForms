@@ -1,55 +1,67 @@
 <div class="submissions-filter-wrapper">
 	<form [formGroup]="filterForm">
-		<!--    Search field, Select form, Select status, Calendar, Map/list switch route, export-->
-		<mat-form-field appearance="fill" class="filter-field search-field">
-			<mat-label>Search...</mat-label>
-			<img alt="search icon" class="search-icon" matPrefix src="assets/icons/search.svg" />
-			<input formControlName="formSearch" matInput type="text" />
-		</mat-form-field>
-		<mat-form-field appearance="fill" class="filter-field select-field">
-			<mat-label>Select form</mat-label>
-			<mat-select formControlName="formType">
-				<mat-option>All</mat-option>
-				<mat-option>My submissions</mat-option>
-				<mat-option>My team's submissions</mat-option>
-			</mat-select>
-			<img alt="arrow down" matSuffix src="assets/icons/arrow_down.svg" />
-		</mat-form-field>
-		<mat-form-field appearance="fill" class="filter-field select-field">
-			<mat-label>Select status</mat-label>
-			<mat-select formControlName="formStatus">
-				<mat-option>All</mat-option>
-				<mat-option>Open</mat-option>
-				<mat-option>Closed</mat-option>
-			</mat-select>
-			<img alt="arrow down" matSuffix src="assets/icons/arrow_down.svg" />
-		</mat-form-field>
-		<mat-form-field appearance="fill" class="filter-field calendar-field">
-			<mat-label>Choose a date</mat-label>
-			<input [matDatepicker]="picker" formControlName="formDate" matInput />
-			<mat-hint>MM/DD/YYYY</mat-hint>
-			<mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-			<mat-datepicker #picker></mat-datepicker>
-		</mat-form-field>
-		<mat-button-toggle-group
-			(change)="onChangeSubmissionView($event)"
-			aria-label="Font Style"
-			formControlName="formMapOrList"
-		>
-			<mat-button-toggle value="map" routerLink="/submissions/map" routerLinkActive="active">
-				Map
-			</mat-button-toggle>
-			<mat-button-toggle
-				value="list"
-				routerLink="/submissions/list"
-				routerLinkActive="active"
+		<div class="main-filters">
+			<mat-form-field appearance="fill" class="filter-field search-field">
+				<mat-label>Search...</mat-label>
+				<img
+					alt="search icon"
+					class="search-icon"
+					matPrefix
+					src="assets/icons/search.svg"
+				/>
+				<input formControlName="formSearch" matInput type="text" />
+			</mat-form-field>
+			<mat-form-field appearance="fill" class="filter-field select-field">
+				<mat-label>Select form</mat-label>
+				<mat-select formControlName="formType">
+					<mat-option>All</mat-option>
+					<mat-option>My submissions</mat-option>
+					<mat-option>My team's submissions</mat-option>
+				</mat-select>
+				<img alt="arrow down" matSuffix src="assets/icons/arrow_down.svg" />
+			</mat-form-field>
+			<mat-form-field appearance="fill" class="filter-field select-field">
+				<mat-label>Select status</mat-label>
+				<mat-select formControlName="formStatus">
+					<mat-option>All</mat-option>
+					<mat-option>Open</mat-option>
+					<mat-option>Closed</mat-option>
+				</mat-select>
+				<img alt="arrow down" matSuffix src="assets/icons/arrow_down.svg" />
+			</mat-form-field>
+			<mat-form-field appearance="fill" class="filter-field calendar-field">
+				<mat-label>Choose a date</mat-label>
+				<input [matDatepicker]="picker" formControlName="formDate" matInput />
+				<mat-hint>MM/DD/YYYY</mat-hint>
+				<mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+				<mat-datepicker #picker></mat-datepicker>
+			</mat-form-field>
+		</div>
+		<div class="right-buttons">
+			<mat-button-toggle-group
+				(change)="onChangeSubmissionView($event)"
+				aria-label="Font Style"
+				formControlName="formMapOrList"
 			>
-				List
-			</mat-button-toggle>
-		</mat-button-toggle-group>
-		<button (click)="exportSubmissions()" class="export-button" color="primary" mat-button>
-			<img alt="export icon" src="assets/icons/paper_download.svg" />
-			<span>Export</span>
-		</button>
+				<mat-button-toggle
+					value="map"
+					routerLink="/submissions/map"
+					routerLinkActive="active"
+				>
+					Map
+				</mat-button-toggle>
+				<mat-button-toggle
+					value="list"
+					routerLink="/submissions/list"
+					routerLinkActive="active"
+				>
+					List
+				</mat-button-toggle>
+			</mat-button-toggle-group>
+			<button (click)="exportSubmissions()" class="export-button" color="primary" mat-button>
+				<img alt="export icon" src="assets/icons/paper_download.svg" />
+				<span>Export</span>
+			</button>
+		</div>
 	</form>
 </div>
