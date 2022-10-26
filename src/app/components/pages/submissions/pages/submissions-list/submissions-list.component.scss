@@ -24,6 +24,15 @@
 		border: 1px transparent;
 		box-shadow: none;
 		border-radius: 8px;
+		.width-field {
+			min-width: 180px;
+		}
+		.address-field {
+			padding-right: 20px;
+		}
+		.task-field {
+			min-width: 240px;
+		}
 		.mat-column-select {
 			width: 54px;
 		}

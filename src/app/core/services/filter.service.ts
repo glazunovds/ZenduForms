@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Moment } from 'moment';
 
 @Injectable({
 	providedIn: 'root',
@@ -26,5 +27,5 @@ export interface Filter {
 	search: string;
 	form: string;
 	status: string;
-	date: number | null;
+	date: Moment | null;
 }

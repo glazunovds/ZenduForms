@@ -1,6 +1,7 @@
 import { Pipe } from '@angular/core';
 import { ISubmission } from '../../../../../core/models';
 import { Filter } from '../../../../../core/services/filter.service';
+import * as moment from 'moment';
 
 @Pipe({
 	name: 'listFilter',
@@ -11,13 +12,17 @@ export class ListFilterPipe {
 			return value;
 		}
 		return value.filter((item) => {
-			return !(
-				q.search &&
-				item.taskName.toLowerCase().indexOf(q.search.toLowerCase()) === -1 &&
-				item.status.toLowerCase().indexOf(q.search.toLowerCase()) === -1 &&
-				item.emailFrom.toLowerCase().indexOf(q.search.toLowerCase()) === -1 &&
-				item.emailTo.toLowerCase().indexOf(q.search.toLowerCase()) === -1 &&
-				item.customerAddress.toLowerCase().indexOf(q.search.toLowerCase()) === -1
+			const search = q.search.toLowerCase();
+			const sameTaskName = item.taskName.toLowerCase().includes(search);
+			const sameEmailFrom = item.emailFrom.toLowerCase().includes(search);
+			const sameEmailTo = item.emailTo.toLowerCase().includes(search);
+			const sameCustomerAddress = item.customerAddress.toLowerCase().includes(search);
+			const sameDate = q.date ? moment(item.dueDateRaw).isSame(q.date, 'day') : true;
+			const sameStatus = q.status && q.status !== 'all' ? q.status === item.status : true;
+			return (
+				(sameTaskName || sameEmailFrom || sameEmailTo || sameCustomerAddress) &&
+				sameDate &&
+				sameStatus
 			);
 		});
 	}

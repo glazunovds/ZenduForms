@@ -37,12 +37,14 @@
 
 			<ng-container matColumnDef="taskName">
 				<th *matHeaderCellDef mat-header-cell>Task</th>
-				<td *matCellDef="let element" mat-cell>{{ element['taskName'] }}</td>
+				<td *matCellDef="let element" mat-cell class="task-field">
+					{{ element['taskName'] }}
+				</td>
 			</ng-container>
 
 			<ng-container matColumnDef="status">
 				<th *matHeaderCellDef mat-header-cell>Status</th>
-				<td *matCellDef="let element" mat-cell>
+				<td *matCellDef="let element" mat-cell class="width-field">
 					<div [ngClass]="element['status']" class="table-status">
 						<div class="status-circle"></div>
 						{{ element['status'] }}
@@ -52,17 +54,23 @@
 
 			<ng-container matColumnDef="emailFrom">
 				<th *matHeaderCellDef mat-header-cell>From</th>
-				<td *matCellDef="let element" mat-cell>{{ element['emailFrom'] }}</td>
+				<td *matCellDef="let element" mat-cell class="width-field">
+					{{ element['emailFrom'] }}
+				</td>
 			</ng-container>
 
 			<ng-container matColumnDef="emailTo">
 				<th *matHeaderCellDef mat-header-cell>To</th>
-				<td *matCellDef="let element" mat-cell>{{ element['emailTo'] }}</td>
+				<td *matCellDef="let element" mat-cell class="width-field">
+					{{ element['emailTo'] }}
+				</td>
 			</ng-container>
 
 			<ng-container matColumnDef="customerAddress">
 				<th *matHeaderCellDef mat-header-cell>Customer Address</th>
-				<td *matCellDef="let element" mat-cell>{{ element['customerAddress'] }}</td>
+				<td *matCellDef="let element" mat-cell class="address-field">
+					{{ element['customerAddress'] }}
+				</td>
 			</ng-container>
 
 			<ng-container matColumnDef="dueDate">
@@ -70,6 +78,7 @@
 				<td
 					*matCellDef="let element"
 					mat-cell
+					class="width-field"
 					[ngClass]="
 						today.getTime() - element['dueDateRaw'] < 1000 * 60 * 60 * 72
 							? 'overdue'

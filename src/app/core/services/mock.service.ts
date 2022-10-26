@@ -3,6 +3,7 @@ import { IAddress, ISubmission, SubmissionStatus } from '../models';
 import { first, map, Observable, timeout } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import * as uuid from 'uuid';
+import * as moment from 'moment';
 
 @Injectable({
 	providedIn: 'root',
@@ -40,7 +41,7 @@ export class MockService {
 			first(),
 			map((addresses) => {
 				const keys = Object.keys(SubmissionStatus);
-				const result = addresses.map((address, index) => {
+				const result = addresses.map((address) => {
 					const randomStatus = keys[
 						Math.floor(Math.random() * keys.length)
 					] as SubmissionStatus;
@@ -53,7 +54,8 @@ export class MockService {
 						emailTo: 'tracy@zendu.com',
 						customerAddress: address,
 						dueDateRaw: randomDate,
-						dueDateShow: new Date(randomDate).toLocaleString(),
+						// format date with moment Oct 8, 01:14 AM
+						dueDateShow: moment(randomDate).format('MMM D, hh:mm A'),
 					};
 				});
 				this.mockData = result;
