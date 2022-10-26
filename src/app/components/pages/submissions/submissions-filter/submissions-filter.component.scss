@@ -3,10 +3,16 @@
 	form {
 		display: flex;
 		justify-content: space-between;
+		flex-wrap: wrap;
 		.main-filters,
 		.right-buttons {
 			display: flex;
 			justify-content: space-between;
+		}
+
+		.main-filters {
+			flex-grow: 1;
+			max-width: 1200px;
 		}
 
 		.filter-field {
@@ -17,7 +23,7 @@
 			margin-right: 40px;
 		}
 		.search-field {
-			width: 334px;
+			width: 100%;
 			.search-icon {
 				padding-right: 10px;
 			}
