@@ -1,29 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { MockService } from '../../../../core/services/mock.service';
 import { saveAs } from 'file-saver';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map, Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-submissions-filter',
 	templateUrl: './submissions-filter.component.html',
 	styleUrls: ['./submissions-filter.component.scss'],
 })
-export class SubmissionsFilterComponent {
+export class SubmissionsFilterComponent implements OnInit, OnDestroy {
 	filterForm: FormGroup;
+	routerSub!: Subscription;
 
-	constructor(private mockService: MockService) {
+	constructor(private mockService: MockService, public router: Router) {
 		this.filterForm = new FormGroup({
 			formSearch: new FormControl(''),
 			formType: new FormControl(''),
 			formStatus: new FormControl(''),
 			formDate: new FormControl(''),
-			formMapOrList: new FormControl('map'),
+			formMapOrList: new FormControl('list'),
 		});
-	}
-
-	onChangeSubmissionView(event: MatButtonToggleChange): void {
-		console.log(event);
 	}
 
 	stop(event: Event) {
@@ -37,4 +35,26 @@ export class SubmissionsFilterComponent {
 		});
 		saveAs(blob, 'submissions.json');
 	}
+
+	ngOnDestroy(): void {
+		this.routerSub.unsubscribe();
+	}
+
+	ngOnInit(): void {
+		this.setMapOrList(this.router.url);
+		this.routerSub = this.router.events
+			.pipe(filter((event) => event instanceof NavigationEnd))
+			.pipe(map((event) => (event as CustomEvent).url))
+			.subscribe((url) => {
+				this.setMapOrList(url);
+			});
+	}
+
+	setMapOrList(url: string) {
+		this.filterForm.controls['formMapOrList'].patchValue(url.includes('map') ? 'map' : 'list');
+	}
+}
+
+interface CustomEvent {
+	url: string;
 }

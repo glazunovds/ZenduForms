@@ -38,23 +38,11 @@
 			</mat-form-field>
 		</div>
 		<div class="right-buttons">
-			<mat-button-toggle-group
-				(change)="onChangeSubmissionView($event)"
-				aria-label="Font Style"
-				formControlName="formMapOrList"
-			>
-				<mat-button-toggle
-					value="map"
-					routerLink="/submissions/map"
-					routerLinkActive="active"
-				>
+			<mat-button-toggle-group aria-label="Font Style" formControlName="formMapOrList">
+				<mat-button-toggle value="map" routerLink="/submissions/map">
 					Map
 				</mat-button-toggle>
-				<mat-button-toggle
-					value="list"
-					routerLink="/submissions/list"
-					routerLinkActive="active"
-				>
+				<mat-button-toggle value="list" routerLink="/submissions/list">
 					List
 				</mat-button-toggle>
 			</mat-button-toggle-group>
