@@ -13,19 +13,27 @@
 			</mat-form-field>
 			<mat-form-field appearance="fill" class="filter-field select-field">
 				<mat-label>Select form</mat-label>
-				<mat-select formControlName="formType">
-					<mat-option>All</mat-option>
-					<mat-option>My submissions</mat-option>
-					<mat-option>My team's submissions</mat-option>
+				<mat-select
+					formControlName="formType"
+					disableOptionCentering
+					panelClass="form-select custom-dropdown"
+				>
+					<mat-option [value]="'all'">All</mat-option>
+					<mat-option [value]="'my'">My submissions</mat-option>
+					<mat-option [value]="'team'">My team's submissions</mat-option>
 				</mat-select>
 				<img alt="arrow down" matSuffix src="assets/icons/arrow_down.svg" />
 			</mat-form-field>
 			<mat-form-field appearance="fill" class="filter-field select-field">
 				<mat-label>Select status</mat-label>
-				<mat-select formControlName="formStatus">
-					<mat-option>All</mat-option>
-					<mat-option>Open</mat-option>
-					<mat-option>Closed</mat-option>
+				<mat-select
+					disableOptionCentering
+					formControlName="formStatus"
+					panelClass="form-status-select custom-dropdown"
+				>
+					<mat-option [value]="'all'">All</mat-option>
+					<mat-option [value]="'open'">Open</mat-option>
+					<mat-option [value]="'closed'">Closed</mat-option>
 				</mat-select>
 				<img alt="arrow down" matSuffix src="assets/icons/arrow_down.svg" />
 			</mat-form-field>
@@ -46,7 +54,13 @@
 					List
 				</mat-button-toggle>
 			</mat-button-toggle-group>
-			<button (click)="exportSubmissions()" class="export-button" color="primary" mat-button>
+			<button
+				(click)="exportSubmissions()"
+				type="button"
+				class="export-button"
+				color="primary"
+				mat-button
+			>
 				<img alt="export icon" src="assets/icons/paper_download.svg" />
 				<span>Export</span>
 			</button>

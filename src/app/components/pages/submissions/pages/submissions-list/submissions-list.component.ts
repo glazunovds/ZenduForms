@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MockService } from '../../../../../core/services/mock.service';
 import { ISubmission } from '../../../../../core/models';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
+import { FilterService } from '../../../../../core/services/filter.service';
 
 @Component({
 	selector: 'app-submissions-list',
@@ -31,7 +30,7 @@ export class SubmissionsListComponent implements AfterViewInit {
 	@ViewChild(MatSort) sort!: MatSort;
 	@ViewChild('p') p: unknown;
 
-	constructor(private mockService: MockService) {}
+	constructor(private mockService: MockService, public filterService: FilterService) {}
 
 	ngAfterViewInit() {
 		// free api cant handle too many requests, sometimes it will fail

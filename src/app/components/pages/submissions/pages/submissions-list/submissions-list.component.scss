@@ -2,7 +2,7 @@
 	height: 100%;
 	position: relative;
 	border: 1px solid #ececed;
-	box-shadow: 0px 2px 10px rgba(6, 12, 27, 0.1);
+	box-shadow: 0 2px 10px rgba(6, 12, 27, 0.1);
 	border-radius: 8px;
 	padding: 2px;
 
@@ -20,7 +20,7 @@
 
 	table {
 		width: 100%;
-		min-height: 536px;
+		//min-height: 536px;
 		border: 1px transparent;
 		box-shadow: none;
 		border-radius: 8px;

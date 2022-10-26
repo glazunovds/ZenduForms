@@ -6,7 +6,11 @@
 	</ng-container>
 	<ng-container>
 		<table
-			[dataSource]="dataSource | paginate: { itemsPerPage: 10, currentPage: page }"
+			[dataSource]="
+				dataSource
+					| listFilter: filterService.getFilter()
+					| paginate: { itemsPerPage: PAGE_SIZE, currentPage: page }
+			"
 			class="mat-elevation-z8"
 			mat-table
 		>
@@ -79,6 +83,11 @@
 
 			<tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
 			<tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+			<tr class="mat-row" *matNoDataRow>
+				<td class="mat-cell" [attr.colspan]="displayedColumns.length">
+					No data matching the filter.
+				</td>
+			</tr>
 		</table>
 	</ng-container>
 </div>

@@ -8,6 +8,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ListFilterPipe } from './list-filter.pipe';
 
 const routes: Routes = [
 	{
@@ -17,7 +18,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	declarations: [SubmissionsListComponent],
+	declarations: [SubmissionsListComponent, ListFilterPipe],
 	imports: [
 		CommonModule,
 		RouterModule.forChild(routes),

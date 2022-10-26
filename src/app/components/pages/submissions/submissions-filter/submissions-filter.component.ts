@@ -3,7 +3,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MockService } from '../../../../core/services/mock.service';
 import { saveAs } from 'file-saver';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, map, Subscription } from 'rxjs';
+import { debounceTime, filter, map, Subscription } from 'rxjs';
+import { FilterService } from '../../../../core/services/filter.service';
 
 @Component({
 	selector: 'app-submissions-filter',
@@ -13,10 +14,15 @@ import { filter, map, Subscription } from 'rxjs';
 export class SubmissionsFilterComponent implements OnInit, OnDestroy {
 	filterForm: FormGroup;
 	routerSub!: Subscription;
+	filterFormChanges!: Subscription;
 
-	constructor(private mockService: MockService, public router: Router) {
+	constructor(
+		private mockService: MockService,
+		private filterService: FilterService,
+		public router: Router,
+	) {
 		this.filterForm = new FormGroup({
-			formSearch: new FormControl(''),
+			formSearch: new FormControl('', { updateOn: 'change' }),
 			formType: new FormControl(''),
 			formStatus: new FormControl(''),
 			formDate: new FormControl(''),
@@ -48,10 +54,24 @@ export class SubmissionsFilterComponent implements OnInit, OnDestroy {
 			.subscribe((url) => {
 				this.setMapOrList(url);
 			});
+		this.filterFormChanges = this.filterForm.valueChanges
+			.pipe(debounceTime(50))
+			.subscribe(() => {
+				this.setFilter();
+			});
 	}
 
 	setMapOrList(url: string) {
 		this.filterForm.controls['formMapOrList'].patchValue(url.includes('map') ? 'map' : 'list');
+	}
+
+	setFilter() {
+		this.filterService.setFilter({
+			search: this.filterForm.controls['formSearch'].value,
+			form: this.filterForm.controls['formType'].value,
+			status: this.filterForm.controls['formStatus'].value,
+			date: this.filterForm.controls['formDate'].value,
+		});
 	}
 }
 
