@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkZenduForms=self.webpackChunkZenduForms||[]).push([[425],{2425:(_,t,o)=>{o.r(t),o.d(t,{HistoryModule:()=>M});var u=o(6895),r=o(30),l=o(9132),s=o(4650);const E=[{path:"",component:r.u}];let M=(()=>{class n{}return n.\u0275fac=function(d){return new(d||n)},n.\u0275mod=s.oAB({type:n}),n.\u0275inj=s.cJS({imports:[u.ez,l.Bz.forChild(E)]}),n})()}}]);

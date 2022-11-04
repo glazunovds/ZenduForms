@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkZenduForms=self.webpackChunkZenduForms||[]).push([[614],{1614:(M,u,o)=>{o.r(u),o.d(u,{PageNotFoundModule:()=>r});var a=o(6895),d=o(9132),s=o(30),t=o(4650);const l=[{path:"",component:s.u}];let r=(()=>{class n{}return n.\u0275fac=function(E){return new(E||n)},n.\u0275mod=t.oAB({type:n}),n.\u0275inj=t.cJS({imports:[a.ez,d.Bz.forChild(l)]}),n})()}}]);
